@@ -77,6 +77,27 @@ namespace DekanatWebExample.Data
                 },
                 new Student()
                 {
+                    FirstName = "Ulyana",
+                    LastName = "Efimova",
+                    BirthDate = DateTime.Parse("2000-5-12"),
+                    Group = groups[0]
+                },
+                new Student()
+                {
+                    FirstName = "Tatyana",
+                    LastName = "Kutuzova",
+                    BirthDate = DateTime.Parse("2001-1-8"),
+                    Group = groups[0]
+                },
+                new Student()
+                {
+                    FirstName = "Timofej",
+                    LastName = "Ruzaev",
+                    BirthDate = DateTime.Parse("2001-7-19"),
+                    Group = groups[0]
+                },
+                new Student()
+                {
                     FirstName = "Anna",
                     LastName = "Lutikova",
                     BirthDate = DateTime.Parse("2001-1-1"),
@@ -88,6 +109,20 @@ namespace DekanatWebExample.Data
                     LastName = "Tupaev",
                     BirthDate = DateTime.Parse("2000-8-4"),
                     Group = groups[1]
+                },
+                new Student()
+                {
+                    FirstName = "Timur",
+                    LastName = "Kulinov",
+                    BirthDate = DateTime.Parse("2000-8-4"),
+                    Group = groups[2]
+                },
+                new Student()
+                {
+                    FirstName = "Tamara",
+                    LastName = "Skvortsova",
+                    BirthDate = DateTime.Parse("2000-8-4"),
+                    Group = groups[3]
                 }
             };
 
