@@ -47,7 +47,7 @@ namespace DekanatWebExample.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Year,EducationForm,EducationProgram,Number")] Group group)
+        public ActionResult Create([Bind(Include = "Year,EducationForm,EducationProgram,Number")] Group group)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace DekanatWebExample.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Year,EducationForm,EducationProgram,Number")] Group group)
+        public ActionResult Edit([Bind(Include = "Year,EducationForm,EducationProgram,Number")] Group group)
         {
             if (ModelState.IsValid)
             {

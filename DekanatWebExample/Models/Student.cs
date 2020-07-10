@@ -25,7 +25,7 @@ namespace DekanatWebExample.Models
         public int GroupId { get; set; }
         public virtual Group Group { get; set; }
 
-        public string FullName => string.Join(" ", new[] { FirstName, LastName });
+        public string FullName => $"{LastName} {FirstName.Substring(0, 1)}.";
 
     }
 }

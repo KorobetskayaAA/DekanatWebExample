@@ -39,13 +39,14 @@ namespace DekanatWebExample.Models
 
         // programm abbreviation-YearNumber(Form) Example: PIEE-31(Z)
         // TODO separate ed. program with abbreviation method
-        public string Abbreviation => string.Join("", EducationProgram.Split(new [] { ' ', '-' })
-                                                   .Select(w => w.Substring(0, 1))) +
+        public string Name => string.Join("", 
+            EducationProgram.Split(new [] { ' ', '-' })
+                            .Select(w => w.Substring(0, 1))) +
                 $"-{Year}{Number}({EducationForm.ToString()[0]})";
 
         public override string ToString()
         {
-            return Abbreviation;
+            return Name;
         }
     }
 }

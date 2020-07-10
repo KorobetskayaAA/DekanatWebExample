@@ -16,14 +16,69 @@ namespace DekanatWebExample.Controllers
         private DekanatContext db = new DekanatContext();
 
         // GET: Students
-        public ActionResult Index(string groupName)
+        public ActionResult Index(int? groupID, string searchString, string sortOrder)
         {
+            var groups = from g in db.Groups
+                         select g;
+
+            if (groupID == null)
+            {
+                groupID = groups.First().ID;
+            }
+
+            ViewBag.Groups = new SelectList(groups, "ID", "Name", groupID);
+
             var students = from s in db.Students
                            select s;
 
-            if (!string.IsNullOrEmpty(groupName))
+            students = students.Where(s => s.GroupId == groupID);
+
+
+            if (!string.IsNullOrEmpty(searchString))
             {
-                students = students.Where(s => s.Group.ToString() == groupName);
+                students = students.Where(s => s.FirstName.Contains(searchString) ||
+                                               s.LastName.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "Studbilet":
+                    if (ViewBag.StudbiletSortParam == "^")
+                    {
+                        students = students.OrderByDescending(s => s.Studbilet);
+                        ViewBag.StudbiletSortParam = "v";
+                    }
+                    else
+                    {
+                        students = students.OrderBy(s => s.Studbilet);
+                        ViewBag.StudbiletSortParam = "^";
+                    }
+                    break;
+                // TODO: sort by kurs, ed.program, form, number. IComparable is useless
+                case "Group":
+                    if (ViewBag.GroupSortParam == "^")
+                    {
+                        students = students.OrderByDescending(s => s.GroupId);
+                        ViewBag.GroupSortParam = "v";
+                    }
+                    else
+                    {
+                        students = students.OrderBy(s => s.GroupId);
+                        ViewBag.GroupSortParam = "^";
+                    }
+                    break;
+                default: 
+                    if (ViewBag.NameSortParam == "^")
+                    {
+                        students = students.OrderByDescending(s => s.LastName + s.FirstName);
+                        ViewBag.NameSortParam = "v";
+                    }
+                    else
+                    {
+                        students = students.OrderBy(s => s.LastName + s.FirstName);
+                        ViewBag.NameSortParam = "^";
+                    }
+                    break;
             }
 
             return View(students.ToList());
@@ -55,7 +110,7 @@ namespace DekanatWebExample.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,FirstName,LastName,BirthDate")] Student student)
+        public ActionResult Create([Bind(Include = "Studbilet,FirstName,LastName,BirthDate")] Student student)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +142,7 @@ namespace DekanatWebExample.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,FirstName,LastName,BirthDate")] Student student)
+        public ActionResult Edit([Bind(Include = "FirstName,LastName,BirthDate")] Student student)
         {
             if (ModelState.IsValid)
             {

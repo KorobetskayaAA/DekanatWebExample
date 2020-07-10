@@ -57,7 +57,7 @@ namespace DekanatWebExample.Data
                 new Student()
                 {
                     FirstName = "Petr",
-                    LastName = "Kutnetsov",
+                    LastName = "Kuznetsov",
                     BirthDate = DateTime.Parse("2002-4-2"),
                     Group = groups[0]
                 },
