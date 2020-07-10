@@ -1,0 +1,71 @@
+﻿@model DekanatWebExample.Models.Group
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Group</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Year)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Year)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EducationForm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EducationForm)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EducationProgram)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EducationProgram)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Students)
+        </dt>
+
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Full Name</th>
+                    <th>No of studbilet</th>
+                </tr>
+                @foreach (var student in Model.Students)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(model => student.FullName)</td>
+                        <td>@Html.DisplayFor(model => student.Studbilet)</td>
+                    </tr>
+                }
+            </table>
+
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
