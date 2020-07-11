@@ -40,43 +40,60 @@ namespace DekanatWebExample.Controllers
                                                s.LastName.Contains(searchString));
             }
 
-            switch (sortOrder)
+            if (string.IsNullOrEmpty(sortOrder))
+            {
+                sortOrder = "Name";
+            }
+            var sortOrderParts = sortOrder.Split('_');
+            switch (sortOrderParts[0])
             {
                 case "Studbilet":
-                    if (ViewBag.StudbiletSortParam == "^")
+                    if (sortOrderParts.Length > 1 && sortOrderParts[1] == "desc")
                     {
                         students = students.OrderByDescending(s => s.Studbilet);
-                        ViewBag.StudbiletSortParam = "v";
+                        ViewBag.StudbiletSortParam = "↓";
                     }
                     else
                     {
                         students = students.OrderBy(s => s.Studbilet);
-                        ViewBag.StudbiletSortParam = "^";
+                        ViewBag.StudbiletSortParam = "↑";
+                    }
+                    break;
+                case "BirthDate":
+                    if (sortOrderParts.Length > 1 && sortOrderParts[1] == "desc")
+                    {
+                        students = students.OrderByDescending(s => s.BirthDate);
+                        ViewBag.BirthDateSortParam = "↓";
+                    }
+                    else
+                    {
+                        students = students.OrderBy(s => s.BirthDate);
+                        ViewBag.BirthDateSortParam = "↑";
                     }
                     break;
                 // TODO: sort by kurs, ed.program, form, number. IComparable is useless
                 case "Group":
-                    if (ViewBag.GroupSortParam == "^")
+                    if (sortOrderParts.Length > 1 && sortOrderParts[1] == "desc")
                     {
                         students = students.OrderByDescending(s => s.GroupId);
-                        ViewBag.GroupSortParam = "v";
+                        ViewBag.GroupSortParam = "↓";
                     }
                     else
                     {
                         students = students.OrderBy(s => s.GroupId);
-                        ViewBag.GroupSortParam = "^";
+                        ViewBag.GroupSortParam = "↑";
                     }
                     break;
                 default: 
-                    if (ViewBag.NameSortParam == "^")
+                    if (sortOrderParts.Length > 1 && sortOrderParts[1] == "desc")
                     {
                         students = students.OrderByDescending(s => s.LastName + s.FirstName);
-                        ViewBag.NameSortParam = "v";
+                        ViewBag.NameSortParam = "↓";
                     }
                     else
                     {
                         students = students.OrderBy(s => s.LastName + s.FirstName);
-                        ViewBag.NameSortParam = "^";
+                        ViewBag.NameSortParam = "↑";
                     }
                     break;
             }

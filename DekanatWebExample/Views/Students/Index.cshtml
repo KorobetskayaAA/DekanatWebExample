@@ -6,30 +6,70 @@
 
     <h2>Students</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<form>
-    Group: @Html.DropDownList("groupID", ViewBag.Groups as SelectList)
-    Name: @Html.TextBox("searchString")
-    <input type="submit" value="Search" />
-</form>
+<div class="panel">
+    <span class="btn">
+        @Html.ActionLink("New Student", "Create")
+    </span>
+    <form class="form-inline">
+        Group: @Html.DropDownList("groupID", ViewBag.Groups as SelectList)
+        Name: @Html.TextBox("searchString")
+        <input type="submit" value="Search" />
+    </form>
+</div>
+
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Studbilet)
-            @Html.ActionLink("v", "Index", new { sortOrder = "Studbilet" })
+            @{
+                if (ViewBag.StudbiletSortParam == "↑")
+                {
+                    @Html.ActionLink("↓", "Index", new { sortOrder = "Studbilet_desc" });
+                }
+                else
+                {
+                    @Html.ActionLink("↑", "Index", new { sortOrder = "Studbilet" });
+                }
+             }
         </th>
         <th>
             @Html.DisplayNameFor(model => model.FullName)
-            @Html.ActionLink("v", "Index", new { sortOrder = "Name" })
+            @{
+                if (ViewBag.NameSortParam == "↑")
+                {
+                    @Html.ActionLink("↓", "Index", new { sortOrder = "Name_desc" });
+                }
+                else
+                {
+                    @Html.ActionLink("↑", "Index", new { sortOrder = "Name" });
+                }
+            }
         </th>
         <th>
             @Html.DisplayNameFor(model => model.BirthDate)
+            @{
+                if (ViewBag.BirthDateSortParam == "↑")
+                {
+                    @Html.ActionLink("↓", "Index", new { sortOrder = "BirthDate_desc" });
+                }
+                else
+                {
+                    @Html.ActionLink("↑", "Index", new { sortOrder = "BirthDate" });
+                }
+            }
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Group)
-            @Html.ActionLink("v", "Index", new { sortOrder = "Group" })
+            @{
+                if (ViewBag.GroupSortParam == "↑")
+                {
+                    @Html.ActionLink("↓", "Index", new { sortOrder = "Group_desc" });
+                }
+                else
+                {
+                    @Html.ActionLink("↑", "Index", new { sortOrder = "Group" });
+                }
+            }
         </th>
         <th></th>
     </tr>

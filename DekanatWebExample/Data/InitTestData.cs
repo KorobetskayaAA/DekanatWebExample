@@ -131,7 +131,6 @@ namespace DekanatWebExample.Data
             {
                 students[i].Studbilet = (i + 200 + 
                     + (DateTime.Now.Year - 2000 + 1 - students[i].Group.Year) * 1000000).ToString();
-
             }
 
             context.Students.AddRange(students);
