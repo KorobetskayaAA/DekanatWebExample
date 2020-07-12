@@ -11,45 +11,32 @@ namespace DekanatWebExample.Data
     {
         protected override void Seed(DekanatContext context)
         {
-            var groups = new List<Group>
+            var groups = new List<Group>();
+            var random = new Random(12);
+
+            foreach (var edProgram in new string[] { "Applied Informatics in E-Economy",
+                "State and Municipal Administration", "Management in Organizations", "Ensurance and Taxes", 
+                "Accounting and Audition", "Regional Tourism", "Services in Hotel and Restaurant Business"})
             {
-                new Group() {
-                    EducationForm = EducationForms.Ochnoe,
-                    EducationProgram = "Applied Informatics in E-Economy",
-                    Year = 1,
-                    Number = 1
-                },
-                new Group() {
-                    EducationForm = EducationForms.Ochnoe,
-                    EducationProgram = "Applied Informatics in E-Economy",
-                    Year = 2,
-                    Number = 1
-                },
-                new Group() {
-                    EducationForm = EducationForms.Ochnoe,
-                    EducationProgram = "Applied Informatics in E-Economy",
-                    Year = 3,
-                    Number = 1
-                },
-                new Group() {
-                    EducationForm = EducationForms.Zaochnoe,
-                    EducationProgram = "Applied Informatics in E-Economy",
-                    Year = 3,
-                    Number = 1
-                },
-                new Group() {
-                    EducationForm = EducationForms.Ochnoe,
-                    EducationProgram = "State and Municipal Administration",
-                    Year = 1,
-                    Number = 1
-                },
-                new Group() {
-                    EducationForm = EducationForms.Ochnoe,
-                    EducationProgram = "State and Municipal Administration",
-                    Year = 1,
-                    Number = 2
+                foreach (EducationForms edForm in Enum.GetValues(typeof(EducationForms)))
+                {
+                    for (int year = 1; year <= 4; year++)
+                    {
+                        for (int num = 1; num <= random.Next(5) + 1; num++)
+                        {
+                            groups.Add(new Group()
+                            {
+                                EducationForm = edForm,
+                                EducationProgram = edProgram,
+                                Year = year,
+                                Number = num
+                            });
+                            if (edForm == EducationForms.Zaochnoe)
+                                break;
+                        }
+                    }
                 }
-            };
+            }
             context.Groups.AddRange(groups);
 
             var students = new List<Student>()
