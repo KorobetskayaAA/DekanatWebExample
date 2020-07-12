@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using DekanatWebExample.Data;
 using DekanatWebExample.Models;
 
+using PagedList;
+
 namespace DekanatWebExample.Controllers
 {
     public class GroupsController : Controller
@@ -16,9 +18,15 @@ namespace DekanatWebExample.Controllers
         private DekanatContext db = new DekanatContext();
 
         // GET: Groups
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View(db.Groups.ToList());
+            var groups = from g in db.Groups
+                         orderby g.EducationProgram, g.EducationForm, g.Year, g.Number
+                         select g;
+
+            ViewBag.PageSize = 10;
+
+            return View(groups.ToPagedList(page ?? 1, (int)ViewBag.PageSize));
         }
 
         // GET: Groups/Details/5

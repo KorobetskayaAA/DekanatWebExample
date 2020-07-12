@@ -1,7 +1,10 @@
 ﻿@model IEnumerable<DekanatWebExample.Models.Group>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "Groups";
+    var paged = (PagedList.IPagedList)Model;
 }
 
 <h2>Groups</h2>
@@ -63,3 +66,7 @@
     }
 
 </table>
+
+<hr/>
+Page @(paged.PageCount < paged.PageNumber ? 0 : paged.PageNumber) of @paged.PageCount
+@Html.PagedListPager(paged, page => Url.Action("Index", new { page }))
