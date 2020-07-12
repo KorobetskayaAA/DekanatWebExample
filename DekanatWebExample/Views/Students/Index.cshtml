@@ -4,96 +4,100 @@
     ViewBag.Title = "Students";
 }
 
-    <h2>Students</h2>
+<h2>Students</h2>
 
-<div class="panel">
-    <span class="btn">
-        @Html.ActionLink("New Student", "Create")
-    </span>
-    <form class="form-inline">
-        Group: @Html.DropDownList("groupID", ViewBag.Groups as SelectList)
-        Name: @Html.TextBox("searchString")
-        <input type="submit" value="Search" />
-    </form>
+<div class="panel-group">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="btn-group">
+                @Html.ActionLink("New Student", "Create", null, new { @class = "btn btn-success" })
+            </div>
+        </div>
+        <div class="col-xs-12 col-lg-7">
+            <form class="input-group">
+                <label class="input-group-addon">Group</label>
+                @Html.DropDownList("groupID", ViewBag.Groups as SelectList, new { @class = "form-control" })
+                <input type="submit" value="Select" class="btn btn-primary" />
+                @Html.ActionLink("Edit", "Index", "Groups", new { @class = "btn btn-default" })
+            </form>
+        </div>
+        <div class="col-xs-12 col-lg-5">
+            <form class="input-group">
+                @Html.TextBox("searchString", "", new { placeholder = "Search by name", @class = "form-control" })
+                <span class="input-group-btn">
+                    <button type="submit" value="Search" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    </button>
+                    @Html.ActionLink("x", "Index", new { searchString = "" }, new { @class = "btn btn-default" })
+                </span>
+            </form>
+        </div>
+    </div>
 </div>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Studbilet)
-            @{
-                if (ViewBag.StudbiletSortParam == "↑")
-                {
-                    @Html.ActionLink("↓", "Index", new { sortOrder = "Studbilet_desc" });
-                }
-                else
-                {
-                    @Html.ActionLink("↑", "Index", new { sortOrder = "Studbilet" });
-                }
-             }
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FullName)
-            @{
-                if (ViewBag.NameSortParam == "↑")
-                {
-                    @Html.ActionLink("↓", "Index", new { sortOrder = "Name_desc" });
-                }
-                else
-                {
-                    @Html.ActionLink("↑", "Index", new { sortOrder = "Name" });
-                }
-            }
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BirthDate)
-            @{
-                if (ViewBag.BirthDateSortParam == "↑")
-                {
-                    @Html.ActionLink("↓", "Index", new { sortOrder = "BirthDate_desc" });
-                }
-                else
-                {
-                    @Html.ActionLink("↑", "Index", new { sortOrder = "BirthDate" });
-                }
-            }
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Group)
-            @{
-                if (ViewBag.GroupSortParam == "↑")
-                {
-                    @Html.ActionLink("↓", "Index", new { sortOrder = "Group_desc" });
-                }
-                else
-                {
-                    @Html.ActionLink("↑", "Index", new { sortOrder = "Group" });
-                }
-            }
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Studbilet)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.FullName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.BirthDate)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Group.Name)
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-    </td>
-</tr>
-}
+    <table class="table table-hover">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Studbilet)
+                @{
+                    if (ViewBag.StudbiletSortParam == "↑")
+                    {
+                        @Html.ActionLink("↓", "Index", new { sortOrder = "Studbilet_desc" });
+                    }
+                    else
+                    {
+                        @Html.ActionLink("↑", "Index", new { sortOrder = "Studbilet" });
+                    }
+                }
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+                @{
+                    if (ViewBag.NameSortParam == "↑")
+                    {
+                        @Html.ActionLink("↓", "Index", new { sortOrder = "Name_desc" });
+                    }
+                    else
+                    {
+                        @Html.ActionLink("↑", "Index", new { sortOrder = "Name" });
+                    }
+                }
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BirthDate)
+                @{
+                    if (ViewBag.BirthDateSortParam == "↑")
+                    {
+                        @Html.ActionLink("↓", "Index", new { sortOrder = "BirthDate_desc" });
+                    }
+                    else
+                    {
+                        @Html.ActionLink("↑", "Index", new { sortOrder = "BirthDate" });
+                    }
+                }
+            </th>
+            <th></th>
+        </tr>
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Studbilet)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BirthDate)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-success btn-sm" })
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "btn btn-info btn-sm" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "btn btn-danger btn-sm" })
+                </td>
+            </tr>
+        }
+
+    </table>

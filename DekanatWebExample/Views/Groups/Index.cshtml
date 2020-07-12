@@ -27,25 +27,25 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Year)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EducationForm)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EducationProgram)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Number)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Year)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.EducationForm)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.EducationProgram)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Number)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-success btn-sm" })
+        @Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "btn btn-info btn-sm" })
+        @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "btn btn-danger btn-sm" })
+    </td>
+</tr>
 }
 
 </table>
